@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="82319b244a294820b896d3c934691192" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="ShoeStore_SyrgashevModel.Categories" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoeStore_SyrgashevModel.Employees" Width="1.5" PointX="3.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoeStore_SyrgashevModel.Manufacturers" Width="1.5" PointX="0.625" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoeStore_SyrgashevModel.OrderDetails" Width="1.5" PointX="5.5" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoeStore_SyrgashevModel.Orders" Width="1.5" PointX="5.375" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoeStore_SyrgashevModel.PickupPoints" Width="1.5" PointX="7.375" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoeStore_SyrgashevModel.Products" Width="1.5" PointX="3.125" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoeStore_SyrgashevModel.Roles" Width="1.5" PointX="1.125" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoeStore_SyrgashevModel.Statuses" Width="1.5" PointX="7.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoeStore_SyrgashevModel.Suppliers" Width="1.5" PointX="0.875" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoeStore_SyrgashevModel.sysdiagrams" Width="1.5" PointX="9.375" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="ShoeStore_SyrgashevModel.FK__Products__Catego__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoeStore_SyrgashevModel.FK__Employees__Role___4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoeStore_SyrgashevModel.FK__Orders__Employee__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoeStore_SyrgashevModel.FK__Products__Manufa__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoeStore_SyrgashevModel.FK__OrderDeta__Order__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoeStore_SyrgashevModel.FK__OrderDeta__Produ__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoeStore_SyrgashevModel.FK__Orders__PickupPo__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoeStore_SyrgashevModel.FK__Orders__Status_I__60A75C0F" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="ShoeStore_SyrgashevModel.FK__Products__Suppli__571DF1D5" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

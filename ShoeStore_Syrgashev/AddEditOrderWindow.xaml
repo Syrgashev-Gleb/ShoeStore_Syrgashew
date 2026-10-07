@@ -1,0 +1,207 @@
+﻿<Window x:Class="ShoeStore_Syrgashev.AddEditOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Добавление/редактирование заказа"
+        Height="740" Width="820"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
+        FontFamily="Times New Roman"
+        Background="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Шапка -->
+        <Border Grid.Row="0" Background="#7FFF00" Padding="20,12">
+            <TextBlock x:Name="HeaderText"
+                       Text="Управление заказом"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"/>
+        </Border>
+
+        <!-- Форма -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="30,20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Артикул (PickupCode) -->
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Артикул заказа:"
+                           FontSize="14" VerticalAlignment="Center" Margin="0,8"/>
+                <TextBox x:Name="ArticleTextBox" Grid.Row="0" Grid.Column="1"
+                         FontSize="14" Height="28" Padding="5,3"
+                         BorderBrush="Gray" BorderThickness="1"
+                         Margin="0,8"/>
+
+                <!-- Статус -->
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Статус заказа:"
+                           FontSize="14" VerticalAlignment="Center" Margin="0,8"/>
+                <ComboBox x:Name="StatusComboBox" Grid.Row="1" Grid.Column="1"
+                          FontSize="14" Height="28" Padding="5,3"
+                          BorderBrush="Gray" BorderThickness="1"
+                          Margin="0,8"
+                          SelectedValuePath="Status_ID"
+                          DisplayMemberPath="Status"/>
+
+                <!-- Адрес пункта выдачи -->
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Адрес пункта выдачи:"
+                           FontSize="14" VerticalAlignment="Center" Margin="0,8"/>
+                <ComboBox x:Name="PickupPointComboBox" Grid.Row="2" Grid.Column="1"
+                          FontSize="14" Height="28" Padding="5,3"
+                          BorderBrush="Gray" BorderThickness="1"
+                          Margin="0,8"
+                          SelectedValuePath="Point_ID"
+                          DisplayMemberPath="FullAddress"/>
+
+                <!-- Дата заказа -->
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Дата заказа:"
+                           FontSize="14" VerticalAlignment="Center" Margin="0,8"/>
+                <DatePicker x:Name="OrderDatePicker" Grid.Row="3" Grid.Column="1"
+                            FontSize="14" Height="28"
+                            Margin="0,8"/>
+
+                <!-- Дата доставки -->
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Дата доставки:"
+                           FontSize="14" VerticalAlignment="Center" Margin="0,8"/>
+                <DatePicker x:Name="DeliveryDatePicker" Grid.Row="4" Grid.Column="1"
+                            FontSize="14" Height="28"
+                            Margin="0,8"/>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                           Text="Состав заказа (товары):"
+                           FontSize="15" FontWeight="Bold"
+                           Margin="0,20,0,5"/>
+
+                <Border Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+                        BorderBrush="Gray" BorderThickness="1" Padding="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Панель добавления строки -->
+                        <Grid Grid.Row="0" Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <ComboBox x:Name="ProductComboBox"
+                                      Grid.Column="0"
+                                      Height="28"
+                                      FontSize="14"
+                                      Padding="5,3"
+                                      BorderBrush="Gray"
+                                      DisplayMemberPath="Article"
+                                      SelectedValuePath="Product_ID"
+                                      ToolTip="Выберите товар"/>
+
+                            <TextBox x:Name="QuantityTextBox"
+                                     Grid.Column="1"
+                                     Margin="10,0,0,0"
+                                     Height="28"
+                                     FontSize="14"
+                                     Padding="5,3"
+                                     BorderBrush="Gray"
+                                     BorderThickness="1"
+                                     PreviewTextInput="QuantityTextBox_PreviewTextInput"
+                                     ToolTip="Количество"/>
+
+                            <Button x:Name="BtnAddItem"
+                                    Grid.Column="2"
+                                    Content="+ Добавить товар"
+                                    Margin="10,0,0,0"
+                                    Padding="12,0"
+                                    Height="28"
+                                    FontSize="13"
+                                    Background="#00FA9A"
+                                    BorderBrush="Gray"
+                                    Cursor="Hand"
+                                    Click="BtnAddItem_Click"/>
+                        </Grid>
+
+                        <!-- Список строк заказа -->
+                        <ListView x:Name="ListItems"
+                                  Grid.Row="1"
+                                  Height="160"
+                                  BorderBrush="Gray"
+                                  BorderThickness="1"
+                                  SelectionMode="Single">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Артикул"
+                                                    Width="120"
+                                                    DisplayMemberBinding="{Binding Products.Article}"/>
+                                    <GridViewColumn Header="Наименование"
+                                                    Width="220"
+                                                    DisplayMemberBinding="{Binding Products.Name}"/>
+                                    <GridViewColumn Header="Цена"
+                                                    Width="100"
+                                                    DisplayMemberBinding="{Binding Products.Price, StringFormat={}{0:F2}}"/>
+                                    <GridViewColumn Header="Количество"
+                                                    Width="100"
+                                                    DisplayMemberBinding="{Binding Quantity}"/>
+                                    <GridViewColumn Header="Сумма"
+                                                    Width="120"
+                                                    DisplayMemberBinding="{Binding Sum, StringFormat={}{0:F2}}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <!-- Кнопка удаления строки -->
+                        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                                    HorizontalAlignment="Right" Margin="0,10,0,0">
+                            <Button x:Name="BtnRemoveItem"
+                                    Content="Удалить строку"
+                                    Padding="12,5"
+                                    FontSize="13"
+                                    Background="#FF6B6B"
+                                    Foreground="White"
+                                    BorderBrush="#CC0000"
+                                    Cursor="Hand"
+                                    Click="BtnRemoveItem_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </ScrollViewer>
+
+        <!-- Кнопки Сохранить / Удалить -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                    HorizontalAlignment="Center" Margin="0,15,0,20">
+            <Button x:Name="SaveBtn" Content="Сохранить"
+                    FontSize="15" Height="38" Width="180"
+                    Background="#00FA9A" BorderBrush="Gray"
+                    BorderThickness="1" Cursor="Hand"
+                    Click="SaveBtn_Click"/>
+
+            <Button x:Name="DeleteBtn" Content="Удалить заказ"
+                    FontSize="15" Height="38" Width="180"
+                    Margin="15,0,0,0"
+                    Background="#FF6B6B" Foreground="White"
+                    BorderBrush="#CC0000" BorderThickness="1"
+                    Cursor="Hand"
+                    Visibility="Collapsed"
+                    Click="DeleteBtn_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
